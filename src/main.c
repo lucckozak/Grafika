@@ -10,25 +10,23 @@
 #include <math.h>
 #include <GL/glut.h>
 
-
-
 /**
  * Main function
  */
 int main(int argc, char* argv[])
 {
-    glutInit(&argc, argv);
+	glutInit(&argc, argv);
 
-    glutInitWindowSize(1000, 700);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitWindowSize(1000, 700);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
-    glutCreateWindow("Szamitogepi Grafika Beadando");
+	glutCreateWindow("Szamitogepi Grafika Beadando");
 
-    init();
+	init();
 
-    glutMainLoop();
+	glutMainLoop();
 
-    return 0;
+	return 0;
 }
 
 /**
@@ -36,12 +34,12 @@ int main(int argc, char* argv[])
  */
 void set_callbacks()
 {
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutKeyboardUpFunc(keyboardUp);
-    glutSpecialFunc(specialFunc);
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+	glutKeyboardUpFunc(keyboardUp);
+	glutSpecialFunc(specialFunc);
 	glutMouseFunc(mouse);
 	glutMotionFunc(motion);
-    glutIdleFunc(idle);
+	glutIdleFunc(idle);
 }

@@ -16,8 +16,10 @@ double degree_to_radian(double degree)
 
 void can_move(struct Camera* camera)
 {
-    if(camera->position.x>size || camera->position.x<-size || camera->position.z<-size || camera->position.z>size)
+    if(camera->position.x>size || camera->position.x<-size || camera->position.z<-size || camera->position.z>size || (camera->position.z > 30 && camera->position.z < 100) && (camera->position.x < 120 && camera->position.x > -20))
+    {
         camera->position=camera->prev_position;
+    }
 }
 
 void init_camera(struct Camera* camera)

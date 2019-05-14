@@ -11,7 +11,7 @@
 #include "callbacks.h"
 
 double sizeOfRoom = 200;
-
+extern GLfloat light_ambient[4];
 GLfloat material_ambient_default[] = {0.9, 0.9, 0.9, 0.5};
 
 void draw_teapot_for_light(){
@@ -26,6 +26,7 @@ void draw_content(World* world)
 {
 	Room roomToDraw = world -> room;
 	glEnable(GL_TEXTURE_2D);
+	glClearDepth(1);
 
     glPushMatrix();
 		draw_walls(roomToDraw);
@@ -35,7 +36,16 @@ void draw_content(World* world)
 	glPushMatrix();
 		glTranslatef(world->cat.position.x, world->cat.position.y, world->cat.position.z);
 
-		glMaterialfv(GL_FRONT, GL_AMBIENT, world->cat.material_ambient);
+		GLfloat light_position[] = {0, 100, 150};//, 0};
+		GLfloat light_diffuse[] = {0.3, 0.3, 0.3, 0.9};
+		GLfloat light_specular[] = {1.0, 1.0, 1.0, 1.0};
+		GLfloat shinnes [] = {50};
+		GLfloat matdiffu[] = {1.0f, 0.f, 0.f, 1.0f};
+		GLfloat matspec[] = {1.0f, 0.f, 0.f, 1.0f};
+		glMaterialfv(GL_FRONT, GL_AMBIENT, light_ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, light_diffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, light_specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, shinnes);
 
 
 		glBindTexture(GL_TEXTURE_2D, world->cat.texture);
@@ -47,7 +57,11 @@ void draw_content(World* world)
 		draw_model(&world->cat.model);
     glPopMatrix();
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient_default);
+	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient_default);
+
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE,matdiffu);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR,matspec);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS,shinnes);
 }
 
 void draw_ground(Room room) {

@@ -30,6 +30,7 @@ void display(void)
 	glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	set_view_point(&camera);
+	fprintf(stdout, "%f %f %f\n", camera.position.x, camera.position.y, camera.position.z);
 
 	if(isHelpOn)
 	{
@@ -55,7 +56,7 @@ void reshape(GLsizei width, GLsizei height)
 
     set_clear_camera_pose(&camera);
 }
-
+extern GLfloat light_ambient[4];
 void keyboard(unsigned char key, int x, int y)
 {
 	switch (key) {
@@ -78,9 +79,17 @@ void keyboard(unsigned char key, int x, int y)
 		action.move_up = TRUE;
 		break;
 	case 'u':
+		light_ambient[0] += 0.1f;
+		light_ambient[1] += 0.1f;
+		light_ambient[2] += 0.1f;
+		light_ambient[3] += 0.1f;
 		action.increase_light = TRUE;
 		break;
 	case 'j':
+		light_ambient[0] -= 0.1f;
+		light_ambient[1] -= 0.1f;
+		light_ambient[2] -= 0.1f;
+		light_ambient[3] -= 0.1f;
 		action.decrease_light = TRUE;
 		break;
 	case 27:
