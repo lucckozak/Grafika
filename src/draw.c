@@ -55,6 +55,24 @@ void draw_content(World* world)
 		glRotatef(-90,0,0,1);
 
 		draw_model(&world->cat.model);
+	glPopMatrix();
+
+	glPushMatrix();
+		glTranslatef(world->closet.position.x, world->closet.position.y, world->closet.position.z);
+
+		glMaterialfv(GL_FRONT, GL_AMBIENT, light_ambient);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, light_diffuse);
+		glMaterialfv(GL_FRONT, GL_SPECULAR, light_specular);
+		glMaterialfv(GL_FRONT, GL_SHININESS, shinnes);
+
+
+		glBindTexture(GL_TEXTURE_2D, world->closet.texture);
+		glScalef(1.5f, 1.5f, 1.5f);
+		glTranslatef(-50, -1, -70);
+		glRotatef(-90,1,0,0);
+		glRotatef(-90,0,0,1);
+
+		draw_model(&world->closet.model);
     glPopMatrix();
 
 	//glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, material_ambient_default);

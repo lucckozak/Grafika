@@ -80,6 +80,7 @@ typedef struct {
 typedef struct {
 	Room room;
 	Object cat;
+	Object closet;
 	int helpTexture;
 }World;
 

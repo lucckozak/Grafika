@@ -539,7 +539,11 @@ void init_entities(World* world) {
 	load_model("models//catobjectfile.obj", &world->cat.model);
 	world->cat.texture = load_texture("textures//catskin.jpg");
 	init_object(&world->cat, 120, 170);
-	
+
+	load_model("models//catobjectfile.obj", &world->closet.model);
+	world->closet.texture = load_texture("textures//catskin.jpg");
+	init_object(&world->closet, -80, 170);
+
 	// Ball (late version)
 
 
