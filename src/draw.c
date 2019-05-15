@@ -24,6 +24,21 @@ void draw_teapot_for_light(){
 
 void draw_content(World* world)
 {
+	world->cat.position.y = sin((glutGet(GLUT_ELAPSED_TIME) / 1000.0f) * 10.0f);
+
+	float toPlayerX = (camera.position.x - 20.0f) - world->closet.position.x;
+	float toPlayerZ = camera.position.z - world->closet.position.z;
+
+	float toPlayerLength = sqrt(toPlayerX * toPlayerX + toPlayerZ * toPlayerZ);
+	toPlayerX /= toPlayerLength;
+	toPlayerZ /= toPlayerLength;
+
+	world->closet.position.x += toPlayerX;
+	world->closet.position.z += toPlayerZ;
+
+	float catRotation = atan2(toPlayerZ, toPlayerX) * 180 / 3.1415926f;
+	fprintf(stdout, "%f\n", catRotation);
+
 	Room roomToDraw = world -> room;
 	glEnable(GL_TEXTURE_2D);
 	glClearDepth(1);
@@ -59,6 +74,7 @@ void draw_content(World* world)
 
 	glPushMatrix();
 		glTranslatef(world->closet.position.x, world->closet.position.y, world->closet.position.z);
+		glRotatef(catRotation, 0.0f, 1.0f, 0.0f);
 
 		glMaterialfv(GL_FRONT, GL_AMBIENT, light_ambient);
 		glMaterialfv(GL_FRONT, GL_DIFFUSE, light_diffuse);
